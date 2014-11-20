@@ -1,8 +1,6 @@
 ## protoip (IP prototyping in FPGA hardware)
 
-	Copyright (c) 2014, Imperial College London
-	All rights reserved.
-	Author: Suardi Andrea <a.suardi@imperial.ac.uk>
+	Author: asuardi <https://github.com/asuardi>
 	Date: November - 2014
 
 **Protoip** is a utility for quickly prototyping C-based IP in FPGA hardware.
