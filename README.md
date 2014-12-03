@@ -4,7 +4,7 @@
 
 Abstracting many specific low level FPGA design details, **protoip** shifts main focus to IP (algorithm) coding (C/C++ programming language), and boosts productivity.
 
-**Protoip** provides tcl-based functions accesible from both Xilinx Vivado Design Suite and Matlab, custom templates, examples and tutorials to support all design phases.
+**Protoip** provides Tcl-based functions accesible from both Xilinx Vivado Design Suite and Matlab, custom templates, examples and tutorials to support all design phases.
 
 **Protoip** is a Xilinx [TclStore](http://www.xilinx.com/products/design-tools/vivado/Tcl-store.html) application and comes together with Xilinx [Vivado Design Suite](http://www.xilinx.com/products/design-tools/vivado/index.htm).
 
