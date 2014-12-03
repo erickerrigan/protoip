@@ -38,7 +38,6 @@ urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/matlab_interf
 urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/matlab_interface/ip_prototype_test.tcl', 'matlab_interface/ip_prototype_test.tcl');
 
 urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/matlab_interface/make_configuration_parameters_matlab_interface.m', 'matlab_interface/make_configuration_parameters_matlab_interface.m');
-urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/matlab_interface/make_configuration_parameters_matlab_interface.tcl', 'matlab_interface/make_configuration_parameters_matlab_interface.tcl');
 
 urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/matlab_interface/make_template.m', 'matlab_interface/make_template.m');
 urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/matlab_interface/make_template.tcl', 'matlab_interface/make_template.tcl');
