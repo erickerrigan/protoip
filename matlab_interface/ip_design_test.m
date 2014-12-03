@@ -52,6 +52,7 @@ str=strcat(str,'.tcl');
 system(sprintf('vivado -mode tcl -source %s', str))
 
 cd ip_design/src;
+clear functions
 test_HIL(project_name)
 cd ../..
 

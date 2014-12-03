@@ -4,7 +4,7 @@
 mkdir(strcat(pwd,'/Temp'));
 cd Temp;
 
-filename = strcat(pwd,'report_test.txt');
+filename = strcat('report_test.txt');
 fid = fopen(filename, 'a+');
 fprintf(fid, '------------------------------------------------\n');
 fclose(fid);
@@ -48,8 +48,9 @@ fclose(fid);
 
 cd ..
 
-type filename
-delete filename
+type(filename)
+delete(filename)
+clear functions
 rmdir(strcat(pwd,'/Temp'),'s')
 
 
