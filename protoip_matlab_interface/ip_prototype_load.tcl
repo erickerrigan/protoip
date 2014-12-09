@@ -37,7 +37,6 @@ if {$new_mem_base_address=={}} {
 	set mem_base_address $new_mem_base_address
 }
 
-tclapp::install icl::protoip
 tclapp::icl::protoip::ip_prototype_load -project_name $r_project_name -board_name $new_board_name -type_eth $new_type_eth -mem_base_address $mem_base_address
 
 

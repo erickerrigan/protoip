@@ -12,8 +12,6 @@ set data [split $file_data "\n"]
 set r_project_name [lindex $data 1]
 
 
-
-tclapp::install icl::protoip
 tclapp::icl::protoip::ip_design_build_debug -project_name $r_project_name
 
 

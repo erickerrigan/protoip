@@ -18,8 +18,9 @@ set new_num_output_vectors [lindex $data [expr ($new_num_input_vectors * 5) + 4 
 set new_board_name [lindex $data [expr ($new_num_input_vectors * 5) + ($new_num_output_vectors * 5) + 5 + 6]] 
 
 
-tclapp::install icl::protoip
-tclapp::icl::protoip::ip_prototype_load_debug -project_name $r_project_name -board_name $new_board_name
+
+
+tclapp::icl::protoip::ip_prototype_build_debug -project_name $r_project_name -board_name $new_board_name
 
 
 	
