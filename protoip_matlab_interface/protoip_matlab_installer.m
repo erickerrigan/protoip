@@ -4,47 +4,47 @@ mkdir('protoip_matlab_interface')
 
 
 %% copy locally protoip matlab_interface from  https://github.com/asuardi/protoip repository
-urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/matlab_interface/ip_design_build.m', 'protoip_matlab_interface/ip_design_build.m');
-urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/matlab_interface/ip_design_build.tcl', 'protoip_matlab_interface/ip_design_build.tcl');
+urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/protoip_matlab_interface/ip_design_build.m', 'protoip_matlab_interface/ip_design_build.m');
+urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/protoip_matlab_interface/ip_design_build.tcl', 'protoip_matlab_interface/ip_design_build.tcl');
 
-urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/matlab_interface/ip_design_build_debug.m', 'protoip_matlab_interface/ip_design_build_debug.m');
-urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/matlab_interface/ip_design_build_debug.tcl', 'protoip_matlab_interface/ip_design_build_debug.tcl');
+urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/protoip_matlab_interface/ip_design_build_debug.m', 'protoip_matlab_interface/ip_design_build_debug.m');
+urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/protoip_matlab_interface/ip_design_build_debug.tcl', 'protoip_matlab_interface/ip_design_build_debug.tcl');
 
-urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/matlab_interface/ip_design_delete.m', 'protoip_matlab_interface/ip_design_delete.m');
-urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/matlab_interface/ip_design_delete.tcl', 'protoip_matlab_interface/ip_design_delete.tcl');
+urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/protoip_matlab_interface/ip_design_delete.m', 'protoip_matlab_interface/ip_design_delete.m');
+urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/protoip_matlab_interface/ip_design_delete.tcl', 'protoip_matlab_interface/ip_design_delete.tcl');
 
-urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/matlab_interface/ip_design_duplicate.m', 'protoip_matlab_interface/ip_design_duplicate.m');
-urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/matlab_interface/ip_design_duplicate.tcl', 'protoip_matlab_interface/ip_design_duplicate.tcl');
+urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/protoip_matlab_interface/ip_design_duplicate.m', 'protoip_matlab_interface/ip_design_duplicate.m');
+urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/protoip_matlab_interface/ip_design_duplicate.tcl', 'protoip_matlab_interface/ip_design_duplicate.tcl');
 
-urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/matlab_interface/ip_design_test.m', 'protoip_matlab_interface/ip_design_test.m');
-urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/matlab_interface/ip_design_test.tcl', 'protoip_matlab_interface/ip_design_test.tcl');
+urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/protoip_matlab_interface/ip_design_test.m', 'protoip_matlab_interface/ip_design_test.m');
+urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/protoip_matlab_interface/ip_design_test.tcl', 'protoip_matlab_interface/ip_design_test.tcl');
 
-urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/matlab_interface/ip_design_test_debug.m', 'protoip_matlab_interface/ip_design_test_debug.m');
-urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/matlab_interface/ip_design_test_debug.tcl', 'protoip_matlab_interface/ip_design_test_debug.tcl');
+urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/protoip_matlab_interface/ip_design_test_debug.m', 'protoip_matlab_interface/ip_design_test_debug.m');
+urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/protoip_matlab_interface/ip_design_test_debug.tcl', 'protoip_matlab_interface/ip_design_test_debug.tcl');
 
-urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/matlab_interface/ip_prototype_build.m', 'protoip_matlab_interface/ip_prototype_build.m');
-urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/matlab_interface/ip_prototype_build.tcl', 'protoip_matlab_interface/ip_prototype_build.tcl');
+urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/protoip_matlab_interface/ip_prototype_build.m', 'protoip_matlab_interface/ip_prototype_build.m');
+urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/protoip_matlab_interface/ip_prototype_build.tcl', 'protoip_matlab_interface/ip_prototype_build.tcl');
 pathtool
-urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/matlab_interface/ip_prototype_build_debug.m', 'protoip_matlab_interface/ip_prototype_build_debug.m');
-urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/matlab_interface/ip_prototype_build_debug.tcl', 'protoip_matlab_interface/ip_prototype_build_debug.tcl');
+urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/protoip_matlab_interface/ip_prototype_build_debug.m', 'protoip_matlab_interface/ip_prototype_build_debug.m');
+urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/protoip_matlab_interface/ip_prototype_build_debug.tcl', 'protoip_matlab_interface/ip_prototype_build_debug.tcl');
 
-urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/matlab_interface/ip_prototype_load.m', 'protoip_matlab_interface/ip_prototype_load.m');
-urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/matlab_interface/ip_prototype_load.tcl', 'protoip_matlab_interface/ip_prototype_load.tcl');
+urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/protoip_matlab_interface/ip_prototype_load.m', 'protoip_matlab_interface/ip_prototype_load.m');
+urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/protoip_matlab_interface/ip_prototype_load.tcl', 'protoip_matlab_interface/ip_prototype_load.tcl');
 
-urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/matlab_interface/ip_prototype_load_debug.m', 'protoip_matlab_interface/ip_prototype_load_debug.m');
-urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/matlab_interface/ip_prototype_load_debug.tcl', 'protoip_matlab_interface/ip_prototype_load_debug.tcl');
+urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/protoip_matlab_interface/ip_prototype_load_debug.m', 'protoip_matlab_interface/ip_prototype_load_debug.m');
+urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/protoip_matlab_interface/ip_prototype_load_debug.tcl', 'protoip_matlab_interface/ip_prototype_load_debug.tcl');
 
-urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/matlab_interface/ip_prototype_test.m', 'protoip_matlab_interface/ip_prototype_test.m');
-urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/matlab_interface/ip_prototype_test.tcl', 'protoip_matlab_interface/ip_prototype_test.tcl');
+urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/protoip_matlab_interface/ip_prototype_test.m', 'protoip_matlab_interface/ip_prototype_test.m');
+urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/protoip_matlab_interface/ip_prototype_test.tcl', 'protoip_matlab_interface/ip_prototype_test.tcl');
 
-urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/matlab_interface/make_configuration_parameters_matlab_interface.m', 'protoip_matlab_interface/make_configuration_parameters_matlab_interface.m');
+urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/protoip_matlab_interface/make_configuration_parameters_matlab_interface.m', 'protoip_matlab_interface/make_configuration_parameters_matlab_interface.m');
 
-urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/matlab_interface/make_template.m', 'protoip_matlab_interface/make_template.m');
-urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/matlab_interface/make_template.tcl', 'protoip_matlab_interface/make_template.tcl');
+urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/protoip_matlab_interface/make_template.m', 'protoip_matlab_interface/make_template.m');
+urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/protoip_matlab_interface/make_template.tcl', 'protoip_matlab_interface/make_template.tcl');
 
-urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/matlab_interface/protoip_matlab_test.m', 'protoip_matlab_interface/protoip_matlab_test.m');
+urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/protoip_matlab_interface/protoip_matlab_test.m', 'protoip_matlab_interface/protoip_matlab_test.m');
 
-urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/matlab_interface/protoip_matlab_installer.tcl', 'protoip_matlab_interface/protoip_matlab_installer.tcl');
+urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/protoip_matlab_interface/protoip_matlab_installer.tcl', 'protoip_matlab_interface/protoip_matlab_installer.tcl');
 
 %% add matlab_interface folder to the path
 path_to_add=(strcat('     ''',pwd,'\protoip_matlab_interface;'', '));
