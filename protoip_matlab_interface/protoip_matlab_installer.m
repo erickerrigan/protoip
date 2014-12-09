@@ -48,7 +48,7 @@ urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/protoip_matla
 
 %% add matlab_interface folder to the path
 path_to_add=(strcat('     ''',pwd,'\protoip_matlab_interface;'', '));
-addpath(path_to_add)
+addpath(path_to_add);
 
 source_file=which('pathdef.m');
 fidr = fopen(source_file,'r');
