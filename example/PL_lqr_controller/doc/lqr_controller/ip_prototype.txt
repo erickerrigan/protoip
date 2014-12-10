@@ -1,0 +1,58 @@
+---------------------------------------------------------
+Input and output vectors:
+---------------------------------------------------------
+
+Name			| Direction		| Number of data 			| Data representation
+
+x0			 	| Input         | X0_IN_LENGTH=6 			|data type "data_t_x0_in" is fixed-point: X0_IN_INTEGERLENGTH=8  bits integer length, X0_IN_FRACTIONLENGTH=16  bits fraction length
+x_ref			 	| Input         | X_REF_IN_LENGTH=6 			|data type "data_t_x_ref_in" is fixed-point: X_REF_IN_INTEGERLENGTH=8  bits integer length, X_REF_IN_FRACTIONLENGTH=16  bits fraction length
+u			 	| Output         | U_OUT_LENGTH=3 			|data type "data_t_u_in" is fixed-point: U_OUT_INTEGERLENGTH=8  bits integer length, U_OUT_FRACTIONLENGTH=16  bits fraction length
+
+
+---------------------------------------------------------
+IP prototype test(s):
+Input and output vectors has been mapped into external DDR3 memory at the following addresses:
+---------------------------------------------------------
+
+Name			| Base address in Byte
+
+x0			 	| 0x02000000 <- 0
+x_ref			 	| 0x02000018 <- (X0_IN_LENGTH)*4
+u			 	| 0x02000030 <- (X0_IN_LENGTH+X_REF_IN_LENGTH)*4
+
+NOTE: the external DDR memory is shared memory between the CPU embedded into the FPGA and the Algorithm implemented into the FPGA programmable logic (PL).
+
+
+To send input vectors from the host (Matlab) to the FPGA call Matlab function "FPGAclientMATLAB" in "test_HIL.m" using the following parameters:
+
+Input vector name		| Packet type 	|	Packet internal ID 	| Data to send	| Packet output size
+x0			 			| 3				| 0						| data vector	| 0
+x_ref			 			| 3				| 1						| data vector	| 0
+
+
+
+To read output vectors from the FPGA to the host PC call Matlab function "FPGAclientMATLAB" in "test_HIL.m" using the following parameters:
+
+Output vector name		| Packet type 	|	Packet internal ID 	| Data to send	| Packet output size
+u			 			| 4				| 0						| 0				| 3
+
+
+---------------------------------------------------------
+FPGA prototype report: lqr_controller.zedboard
+---------------------------------------------------------
+
+
+clock target (ns): 10.000
+clock achieved (ns): 2.409
+Time constraints met during IP prototyping. You might reduce clock target period to build a faster design.
+
+BRAM_18K: 0 (0%) used out off 280 available.
+DSP48E: 9 (4%) used out off 220 available.
+FF: 3972 (3%) used out off 106400 available.
+LUT: 2744 (5%)  used out off 53200 available.
+
+Power total on-chip (W): 1.739
+Power dynamic (W): 1.581
+Power device static (W) 0.159
+Power ARM Cortex-A9 (W): 1.531
+Power programmable logic (W): 0.20800000000000018
