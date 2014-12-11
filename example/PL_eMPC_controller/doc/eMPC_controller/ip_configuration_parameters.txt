@@ -1,0 +1,123 @@
+Template type: PL
+
+
+---------------------------------------------------------
+Input and output vectors:
+---------------------------------------------------------
+
+Name			| Direction		| Number of data 			| Data representation
+
+x			 	| Input         | X_IN_LENGTH=2 			|data type "data_t_x_in" is fixed-point: X_IN_INTEGERLENGTH=8  bits integer length, X_IN_FRACTIONLENGTH=12  bits fraction length
+u			 	| Output         | U_OUT_LENGTH=1 			|data type "data_t_u_in" is fixed-point: U_OUT_INTEGERLENGTH=8  bits integer length, U_OUT_FRACTIONLENGTH=12  bits fraction length
+
+NOTES: 1) the following constants are defined in ip_design/src/foo_data.h and are used by ip_design/src/foo.cpp, ip_design/src/foo_user.cpp and ip_design/src/foo_test.cpp
+       2) ip_design/src/foo_data.h is generated automatically, please do not edit manually.
+
+// FLOAT_FIX_VECTOR_NAME=1 to enable  fixed-point (up to 32 bits word length) arithmetic precision or 
+// FLOAT_FIX_VECTOR_NAME=0 to enable floating-point single arithmetic precision.
+FLOAT_FIX_X_IN=1
+FLOAT_FIX_U_OUT=1
+
+// Input vectors INTEGERLENGTH:
+X_IN_INTEGERLENGTH=8
+// Output vectors INTEGERLENGTH:
+U_OUT_INTEGERLENGTH=8
+
+// Input vectors FRACTIONLENGTH:
+X_IN_FRACTIONLENGTH=12
+// Output vectors FRACTIONLENGTH:
+U_OUT_FRACTIONLENGTH=12
+
+//Input vectors size:
+X_IN_LENGTH=2
+//Output vectors size:
+U_OUT_LENGTH=1
+
+
+---------------------------------------------------------
+FPGA circuit clock frequency
+---------------------------------------------------------
+100 MHz
+
+NOTE: This clock is also used to clock the IP axi-master and axi-slave interface. Please do not exceed 200MHz in order to guarantee time closure during the ip_prototype_build phase.
+
+
+---------------------------------------------------------
+FPGA name
+---------------------------------------------------------
+xc7z020clg484-1
+
+NOTE: Any Xilinx 7 Series and Zynq®-7000 are supported, but only a some of them are supported if the purpose is to prototype the designed IP.
+
+
+---------------------------------------------------------
+Evaluation Borad name
+---------------------------------------------------------
+zedboard
+
+NOTE: Prototype is available only on the supported Evaluation boards which mount the following FPGAs:
+- zedboard : FPGA name should be xc7z020clg484-1
+- microzedboard : FPGA name should be xc7z020clg400-1
+- zc702 : FPGA name should be xc7z020clg484-1
+- zc706 : FPGA name should be xc7z045ffg900-2
+
+
+---------------------------------------------------------
+Ethernet connection type
+---------------------------------------------------------
+UDP-IP
+
+
+---------------------------------------------------------
+DDR3 memory base address
+---------------------------------------------------------
+33554432
+
+
+---------------------------------------------------------
+Number of test(s)
+---------------------------------------------------------
+1000
+
+
+---------------------------------------------------------
+Type of C/RTL test(s): c, xsim, modelsim
+---------------------------------------------------------
+No C/RTL test(s) selected
+
+
+---------------------------------------------------------
+IP design C/RTL test(s):
+Input and output vectors has been mapped into a virtual memory at the following addresses:
+---------------------------------------------------------
+
+Name			| Base address in Byte
+
+x			 	| 0x00000000 <- 0
+u			 	| 0x00000008 <- (X_IN_LENGTH)*4
+
+
+---------------------------------------------------------
+IP prototype test(s):
+Input and output vectors has been mapped into external DDR3 memory at the following addresses:
+---------------------------------------------------------
+
+Name			| Base address in Byte
+
+x			 	| 0x02000000 <- 0
+u			 	| 0x02000008 <- (X_IN_LENGTH)*4
+
+NOTE: the external DDR memory is shared memory between the CPU embedded into the FPGA and the Algorithm implemented into the FPGA programmable logic (PL).
+
+
+To send input vectors from the host (Matlab) to the FPGA call Matlab function "FPGAclientMATLAB" in "test_HIL.m" using the following parameters:
+
+Input vector name		| Packet type 	|	Packet internal ID 	| Data to send	| Packet output size
+x			 			| 3				| 0						| data vector	| 0
+
+
+
+To read output vectors from the FPGA to the host PC call Matlab function "FPGAclientMATLAB" in "test_HIL.m" using the following parameters:
+
+Output vector name		| Packet type 	|	Packet internal ID 	| Data to send	| Packet output size
+u			 			| 4				| 0						| 0				| 1

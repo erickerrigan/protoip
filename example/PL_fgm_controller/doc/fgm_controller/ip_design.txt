@@ -1,0 +1,42 @@
+---------------------------------------------------------
+Input and output vectors:
+---------------------------------------------------------
+
+Name			| Direction		| Number of data 			| Data representation
+
+x			 	| Input         | X_IN_LENGTH=40 			|data type "data_t_x_in" is fixed-point: X_IN_INTEGERLENGTH=8  bits integer length, X_IN_FRACTIONLENGTH=16  bits fraction length
+num_iter			 	| Input         | NUM_ITER_IN_LENGTH=1 			|data type "data_t_num_iter_in" is fixed-point: NUM_ITER_IN_INTEGERLENGTH=16  bits integer length, NUM_ITER_IN_FRACTIONLENGTH=0  bits fraction length
+x			 	| Output         | X_OUT_LENGTH=40 			|data type "data_t_x_in" is fixed-point: X_OUT_INTEGERLENGTH=8  bits integer length, X_OUT_FRACTIONLENGTH=16  bits fraction length
+
+
+---------------------------------------------------------
+IP design C/RTL test(s): input and output vectors has been mapped into a virtual memory at the following addresses:
+(the virtual memory is used by foo_test.cpp)
+---------------------------------------------------------
+
+Name			| Base address in Byte
+
+x			 	| 0x00000000 <- 0
+num_iter			 	| 0x000000A0 <- (X_IN_LENGTH)*4
+x			 	| 0x000000A4 <- (X_IN_LENGTH+NUM_ITER_IN_LENGTH)*4
+
+
+---------------------------------------------------------
+IP build report: fgm_controller
+----------------------------------------------------------
+
+
+clock target (ns): 10.00
+clock estimated (ns): 8.75
+Time constraints might be met during IP prototyping. You can reduce clock target period to build a faster design.
+
+latency (clock cycles): 0
+latency (us): 0.0
+
+Resource utilization:
+BRAM_18K: 2 (0%) used out off 280 available.
+DSP48E: 41 (18%) used out off 220 available.
+FF: 9332 (8%) used out off 106400 available.
+LUT: 17211 (32%) used out off 53200 available.
+
+NOTE: IP design performance might be enhanced by adding directives from Vivado_HLS GUI interface. Run "tclapp::icl::protoip::ip_design_build_debug" to open fgm_controller with Vivado_HLS GUI interface.
