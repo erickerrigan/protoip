@@ -83,7 +83,7 @@ if path_already_exists==0
     fclose(fidr);
     fclose(fidw);
 
-    copyfile(destination_file,source_file,'f')
+    copyfile('pathdef_tmp.m',source_file,'f')
     delete('pathdef_tmp.m');
     
     tmp_str=strcat('''protoip_matlab_interface path'' added successfully');
