@@ -258,6 +258,7 @@ set new_type_design_flow [lindex $data [expr ($new_num_input_vectors * 5) + ($ne
 		
 			if {$count_is_fix==[expr $old_num_input_vectors+$old_num_output_vectors] || $count_is_float==[expr $old_num_input_vectors+$old_num_output_vectors]} {
 
+				set type_design_flow "matlab"
 				tclapp::icl::protoip::make_template::make_project_configuration_parameters_dat $r_project_name $input_vectors $input_vectors_length $input_vectors_type $input_vectors_integer_length $input_vectors_fraction_length $output_vectors $output_vectors_length $output_vectors_type $output_vectors_integer_length $output_vectors_fraction_length $fclk $FPGA_name $board_name $type_eth $mem_base_address $num_test $type_test $type_template $type_design_flow
 				tclapp::icl::protoip::ip_design_build -project_name $r_project_name
 				
