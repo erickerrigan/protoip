@@ -24,7 +24,7 @@ urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/protoip_matla
 
 urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/protoip_matlab_interface/ip_prototype_build.m', 'protoip_matlab_interface/ip_prototype_build.m');
 urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/protoip_matlab_interface/ip_prototype_build.tcl', 'protoip_matlab_interface/ip_prototype_build.tcl');
-pathtool
+
 urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/protoip_matlab_interface/ip_prototype_build_debug.m', 'protoip_matlab_interface/ip_prototype_build_debug.m');
 urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/protoip_matlab_interface/ip_prototype_build_debug.tcl', 'protoip_matlab_interface/ip_prototype_build_debug.tcl');
 
@@ -47,8 +47,7 @@ urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/protoip_matla
 urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/protoip_matlab_interface/protoip_matlab_installer.tcl', 'protoip_matlab_interface/protoip_matlab_installer.tcl');
 
 %% add matlab_interface folder to the path
-path_to_add=(strcat('     ''',pwd,'\protoip_matlab_interface;'', '));
-addpath(path_to_add);
+path_to_add=(strcat('     ''',pwd,'\protoip_matlab_interface;'',  ...'));
 
 source_file=which('pathdef.m');
 fidr = fopen(source_file,'r');
@@ -65,6 +64,7 @@ end
 
 % if path doe not exist, add it to pathdef.m
 if path_already_exists==0
+    addpath(path_to_add);
     fidr = fopen(source_file,'r');
     fidw = fopen('pathdef_tmp.m','w');
 
@@ -74,7 +74,7 @@ if path_already_exists==0
         if isfinite(U) == 1;  
             fwrite(fidw,str) ; 
             str = path_to_add;
-            fwrite(fidw,str) ; 
+            fprintf(fidw,'%s\n',str) ; 
         else
           fwrite(fidw,str) ;  
         end   
@@ -88,8 +88,7 @@ if path_already_exists==0
     
     tmp_str=strcat('''protoip_matlab_interface path'' added successfully');
     disp(tmp_str);
-    
-    
+  
 end
  
 
