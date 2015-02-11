@@ -1,6 +1,4 @@
 
-
-
 #load function arguments passed from Matlab
 set  file_name ""
 append file_name ".metadata/configuration_parameters_matlab_interface.dat"

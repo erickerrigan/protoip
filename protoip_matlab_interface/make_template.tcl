@@ -120,18 +120,6 @@ foreach i $new_output_vectors_type {
 		
 			if {$count_is_fix==[expr $num_input_vectors+$num_output_vectors] || $count_is_float==[expr $num_input_vectors+$num_output_vectors]} {
 
-			
-				
-				set fclk 100; 
-				set FPGA_name "xc7z020clg484-1" 
-				set board_name "zedboard"
-				set type_eth "udp"
-				set mem_base_address 33554432; #32 MB
-				set num_test 1
-				set type_test "c"
-			
-				set type_design_flow "matlab"
-				tclapp::icl::protoip::make_template::make_project_configuration_parameters_dat $r_project_name $input_vectors $input_vectors_length $input_vectors_type $input_vectors_integer_length $input_vectors_fraction_length $output_vectors $output_vectors_length $output_vectors_type $output_vectors_integer_length $output_vectors_fraction_length $fclk $FPGA_name $board_name $type_eth $mem_base_address $num_test $type_test $type_template $type_design_flow
 				tclapp::icl::protoip::make_template -project_name $r_project_name
 				
 			} else {

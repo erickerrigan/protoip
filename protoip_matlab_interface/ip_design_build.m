@@ -44,6 +44,43 @@ str=str(1:end-2);
 str=strcat(str,'.tcl');
 system(sprintf('vivado -mode tcl -source %s', str))
 
+%export timing, resources and power information to Matlab workspace
+varargin=varargin{1,1};
+nargin=length(varargin);
+parameters=[];
+values=[];
+for i=1:2:nargin-1
+    parameters=[parameters,varargin(i)];
+    values=[values,varargin(i+1)];
+
+end
+ for i=1:length(parameters)
+    if strcmp(parameters(i),'project_name')
+        project_name=char(values(i));
+    end
+ end
+str = strcat('doc/',project_name,'/ip_design.dat');
+load(str);
+
+assignin('base', 'Vivado_HLS_IP_target_clock_ns', ip_design(1));
+assignin('base', 'Vivado_HLS_IP_estimated_clock_ns', ip_design(2));
+assignin('base', 'Vivado_HLS_user_function_target_clock_ns', ip_design(3));
+assignin('base', 'Vivado_HLS_user_function_estimated_clock_ns', ip_design(4));
+
+assignin('base', 'Vivado_HLS_IP_latency_clk_cycles', ip_design(5));
+assignin('base', 'Vivado_HLS_IP_latency_us', ip_design(6));
+assignin('base', 'Vivado_HLS_user_function_latency_clk_cycles', ip_design(7));
+
+assignin('base', 'Vivado_HLS_IP_BRAM_18K', ip_design(9));
+assignin('base', 'Vivado_HLS_IP_DSP48E', ip_design(10));
+assignin('base', 'Vivado_HLS_IP_FF', ip_design(11));
+assignin('base', 'Vivado_HLS_IP_LUT', ip_design(12));
+assignin('base', 'Vivado_HLS_user_function_BRAM_18K', ip_design(13));
+assignin('base', 'Vivado_HLS_user_function_DSP48E', ip_design(14));
+assignin('base', 'Vivado_HLS_user_function_FF', ip_design(15));
+assignin('base', 'Vivado_HLS_user_function_LUT', ip_design(16));
+
+
 
 end
 
