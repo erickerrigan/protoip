@@ -70,6 +70,7 @@ assignin('base', 'Vivado_HLS_user_function_estimated_clock_ns', ip_design(4));
 assignin('base', 'Vivado_HLS_IP_latency_clk_cycles', ip_design(5));
 assignin('base', 'Vivado_HLS_IP_latency_us', ip_design(6));
 assignin('base', 'Vivado_HLS_user_function_latency_clk_cycles', ip_design(7));
+assignin('base', 'Vivado_HLS_user_function_latency_us', ip_design(8));
 
 assignin('base', 'Vivado_HLS_IP_BRAM_18K', ip_design(9));
 assignin('base', 'Vivado_HLS_IP_DSP48E', ip_design(10));
