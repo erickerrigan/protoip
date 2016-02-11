@@ -39,6 +39,14 @@ nargin=length(varargin);
         mem_base_address=[];
         type_template=[];
         project_name=[];
+		
+		%added by Bulat
+		soc_input_vectors=[];
+		soc_input_vectors_length=[];
+		soc_output_vectors=[];
+		soc_output_vectors_length=[];
+		%end added by Bulat		
+		
         
         
         for i=1:length(parameters)
@@ -83,6 +91,14 @@ nargin=length(varargin);
                 mem_base_address=char(values(i));
             elseif strcmp(parameters(i),'type')
                 type_template=char(values(i));
+			elseif strcmp(parameters(i),'soc_input') 			%added by Bulat
+				tmp_split = strsplit(char(values(i)),':');
+				soc_input_vectors=[soc_input_vectors,(tmp_split(1))];
+                soc_input_vectors_length=[soc_input_vectors_length,(tmp_split(2))];
+			elseif strcmp(parameters(i),'soc_output') 
+				tmp_split = strsplit(char(values(i)),':');
+				soc_output_vectors=[soc_output_vectors,(tmp_split(1))];
+                soc_output_vectors_length=[soc_output_vectors_length,(tmp_split(2))];		%end added by Bulat		
             else
                tmp_str=strcat('parameter ', parameters(i), 'is not supported'); 
                error(tmp_str);
@@ -169,6 +185,28 @@ nargin=length(varargin);
         fprintf(fid,'%s\n',from);
         fprintf(fid,'#to\n');
         fprintf(fid,'%s\n',to);
+		
+		%added by Bulat
+		fprintf(fid,'#soc_Input\n');
+        fprintf(fid,'%d\n',length(soc_input_vectors));
+        for i=1:length(soc_input_vectors)
+          fprintf(fid,'%s\n',char(soc_input_vectors(i)));  
+          fprintf(fid,'%s\n',char(soc_input_vectors_length(i)));
+          fprintf(fid,'0\n');
+          fprintf(fid,'0\n');
+          fprintf(fid,'0\n');
+        end
+		
+		fprintf(fid,'#soc_Output\n');
+        fprintf(fid,'%d\n',length(soc_output_vectors));
+        for i=1:length(soc_output_vectors)
+          fprintf(fid,'%s\n',char(soc_output_vectors(i)));  
+          fprintf(fid,'%s\n',char(soc_output_vectors_length(i)));
+          fprintf(fid,'0\n');
+          fprintf(fid,'0\n');
+          fprintf(fid,'0\n');
+        end
+		%end added by Bulat
 
         fclose(fid);
 
