@@ -11,7 +11,18 @@ abstracting many specific low level FPGA design details, **protoip** shifts main
 
 The [wiki](https://github.com/asuardi/protoip/wiki/Home) contains documentation on how to use **Protoip** from both Xilinx Vivado and Matlab software. Example designs are also available. 
 
+# How to cite
 
+```
+@INPROCEEDINGS{7330928, 
+author={A. Suardi and E. C. Kerrigan and G. A. Constantinides}, 
+booktitle={European Control Conference (ECC)}, 
+title={Fast FPGA prototyping toolbox for embedded optimization}, 
+year={2015}, 
+pages={2589-2594}, 
+doi={10.1109/ECC.2015.7330928}, 
+month={July},}
+```
 ----------
 
 
