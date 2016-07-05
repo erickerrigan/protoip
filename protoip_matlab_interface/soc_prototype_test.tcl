@@ -127,7 +127,7 @@ set soc_output_vectors_length {}
 	}
 #end added by Bulat
 
-set tmp_dir "ip_prototype/test/results/"
+set tmp_dir "soc_prototype/test/results/"
 append tmp_dir $r_project_name
 file mkdir $tmp_dir
 
@@ -135,42 +135,42 @@ set type_design_flow "matlab"
 [tclapp::icl::protoip::make_template::make_project_configuration_parameters_dat $r_project_name $input_vectors $input_vectors_length $input_vectors_type $input_vectors_integer_length $input_vectors_fraction_length $output_vectors $output_vectors_length $output_vectors_type $output_vectors_integer_length $output_vectors_fraction_length $fclk $FPGA_name $board_name $type_eth $mem_base_address $num_test $type_test $type_template $type_design_flow $soc_input_vectors $soc_input_vectors_length $soc_output_vectors $soc_output_vectors_length]
 [::tclapp::icl::protoip::make_template::make_ip_configuration_parameters_readme_txt $r_project_name]
 # update ip_design/src/FPGAclientAPI.h file
-[::tclapp::icl::protoip::make_template::make_FPGAclientAPI_h  $r_project_name]
+[::tclapp::icl::protoip::make_template::make_soc_FPGAclientAPI_h  $r_project_name]
 
-set tmp_dir "ip_prototype/test/results/"
+set tmp_dir "soc_prototype/test/results/"
 append tmp_dir $r_project_name
 cd $tmp_dir
 
 set time_stamp [clock format [clock seconds] -format "%Y-%m-%d_T%H-%M"]
 
-foreach i $input_vectors {
+foreach i $soc_input_vectors {
 	set file_name ""
-	append file_name $i "_in_log.dat"
+	append file_name "soc_" $i "_in_log.dat"
 	if {[file exists $file_name] == 1} { 
 		set file_name_new ""
-		append file_name_new $time_stamp "_backup_" $i "_in_log.dat"
+		append file_name_new $time_stamp "_backup_soc_" $i "_in_log.dat"
 		file copy -force $file_name $file_name_new
 		file delete -force $file_name
 	}
 }
 
-foreach i $output_vectors {
+foreach i $soc_output_vectors {
 	set file_name ""
-	append file_name "fpga_" $i "_out_log.dat"
+	append file_name "fpga_soc_" $i "_out_log.dat"
 	if {[file exists $file_name] == 1} { 
 		set file_name_new ""
-		append file_name_new $time_stamp "_backup_fpga_" $i "_out_log.dat"
+		append file_name_new $time_stamp "_backup_fpga_soc_" $i "_out_log.dat"
 		file copy -force $file_name $file_name_new
 		file delete -force $file_name
 	}
-	set file_name ""
-	append file_name "matlab_" $i "_out_log.dat"
-	if {[file exists $file_name] == 1} { 
-		set file_name_new ""
-		append file_name_new $time_stamp "_backup_matlab_" $i "_out_log.dat"
-		file copy -force $file_name $file_name_new
-		file delete -force $file_name
-	}
+	#set file_name ""
+	#append file_name "matlab_" $i "_out_log.dat"
+	#if {[file exists $file_name] == 1} { 
+	#	set file_name_new ""
+	#	append file_name_new $time_stamp "_backup_matlab_" $i "_out_log.dat"
+	#	file copy -force $file_name $file_name_new
+	#	file delete -force $file_name
+	#}
 }
 
 set file_name ""
