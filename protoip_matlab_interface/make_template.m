@@ -21,7 +21,10 @@ function make_template(varargin)
 %                            Repeat the command for every output to update
 %                            All inputs and outputs must be of the same type: 
 %                            float or fix
-% 
+%  ['soc_input', 'value']      - SoC input vector name,size and type separated by : symbol         
+%                                Repeat the command for every SoC input vector to update
+%  ['soc_output', 'value']     - Soc output vector name,size and type separated by : symbol
+%                                Repeat the command for every output to update 
 %  Description: 
 %   Build the IP prototype project template in the [WORKING DIRECTORY] 
 %   according to the specified input and outputs vectors.
@@ -49,6 +52,22 @@ function make_template(varargin)
 %   y0[4] floating point
 %   
 %   make_template('type','PL','project_name','my_project0','input','x0:1:float','input','x1:2:float','output','y0:4:float)
+%  Example 3:
+%   SoC prototype:
+%   2 inputs vectors on FPGA level: 
+%   x0[1] floating point
+%   x1[2] floating point
+%
+%   1 output vector on FPGA level: 
+%   y0[4] floating point
+%
+%	1 input on SoC level
+%   soc_x0[1] floating point
+%
+%	1 output on SoC level
+%   soc_y0[2] floating point
+%
+%   make_template('type','PL','project_name','my_project0','input','x0:1:float','input','x1:2:float','output','y0:4:float,'soc_input','soc_x0:1','soc_output','soc_y0:2')
 
 
 %% save temporary file with input arguments   
