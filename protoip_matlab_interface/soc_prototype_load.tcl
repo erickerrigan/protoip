@@ -270,7 +270,7 @@ if {$r_project_name == {}} {
 							} else {
 							
 								set tmp_error ""
-								append tmp_error " -E- NO input vector " $i " found. Use the -usage option for more details."
+								append tmp_error " -E- NO SoC input vector " $i " found. Use the -usage option for more details."
 								error $tmp_error
 							}
 							incr m
@@ -284,7 +284,7 @@ if {$r_project_name == {}} {
 								set old_soc_output_vectors_length [lreplace $old_soc_output_vectors_length $position $position [lindex $new_soc_output_vectors_length $m]]
 							} else {
 								set tmp_error ""
-								append tmp_error " -E- NO output vector " $i " found. Use the -usage option for more details."
+								append tmp_error " -E- NO SoC output vector " $i " found. Use the -usage option for more details."
 								error $tmp_error
 							}
 							incr m
