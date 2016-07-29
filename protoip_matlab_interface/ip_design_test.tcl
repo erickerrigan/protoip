@@ -48,6 +48,27 @@ set new_type_template [lindex $data [expr ($new_num_input_vectors * 5) + ($new_n
 set new_type_design_flow [lindex $data [expr ($new_num_input_vectors * 5) + ($new_num_output_vectors * 5) + 5 + 18]]
 
 
+#added by Bulat
+set new_num_soc_input_vectors [lindex $data [expr [lsearch $data "#soc_Input"] + 1 ]]
+set new_soc_input_vectors {}
+set new_soc_input_vectors_length {}
+			
+for {set i 0} {$i < $new_num_soc_input_vectors} {incr i} {
+	lappend new_soc_input_vectors [lindex $data [expr [lsearch $data "#soc_Input"] + 2 + ($i * 5) ]]
+	lappend new_soc_input_vectors_length [lindex $data [expr [lsearch $data "#soc_Input"] + 3 + ($i * 5) ]]
+}		
+			
+			
+set new_num_soc_output_vectors [lindex $data [expr [lsearch $data "#soc_Output"] + 1 ]]
+set new_soc_output_vectors {}
+set new_soc_output_vectors_length {}
+			
+for {set i 0} {$i < $new_num_soc_output_vectors} {incr i} {
+	lappend new_soc_output_vectors [lindex $data [expr [lsearch $data "#soc_Output"] + 2 + ($i * 5) ]]
+	lappend new_soc_output_vectors_length [lindex $data [expr [lsearch $data "#soc_Output"] + 3 + ($i * 5) ]]
+}
+#end added by Bulat
+
 	set  file_name ""
 	append file_name ".metadata/" $r_project_name "_configuration_parameters.dat"
 	
@@ -123,6 +144,29 @@ set new_type_design_flow [lindex $data [expr ($new_num_input_vectors * 5) + ($ne
 		set old_type_test [lindex $data [expr ($old_num_input_vectors * 5) + ($old_num_output_vectors * 5) + 5 + 14]] 
 		set old_type_template [lindex $data [expr ($old_num_input_vectors * 5) + ($old_num_output_vectors * 5) + 5 + 16]]
 		set old_type_design_flow [lindex $data [expr ($old_num_input_vectors * 5) + ($old_num_output_vectors * 5) + 5 + 18]]
+
+
+		#added by Bulat
+		set old_num_soc_input_vectors [lindex $data [expr [lsearch $data "#soc_Input"] + 1 ]]
+		set old_soc_input_vectors {}
+		set old_soc_input_vectors_length {}
+			
+		for {set i 0} {$i < $old_num_soc_input_vectors} {incr i} {
+			lappend old_soc_input_vectors [lindex $data [expr [lsearch $data "#soc_Input"] + 2 + ($i * 5) ]]
+			lappend old_soc_input_vectors_length [lindex $data [expr [lsearch $data "#soc_Input"] + 3 + ($i * 5) ]]
+		}		
+			
+			
+		set old_num_soc_output_vectors [lindex $data [expr [lsearch $data "#soc_Output"] + 1 ]]
+		set old_soc_output_vectors {}
+		set old_soc_output_vectors_length {}
+			
+		for {set i 0} {$i < $old_num_soc_output_vectors} {incr i} {
+			lappend old_soc_output_vectors [lindex $data [expr [lsearch $data "#soc_Output"] + 2 + ($i * 5) ]]
+			lappend old_soc_output_vectors_length [lindex $data [expr [lsearch $data "#soc_Output"] + 3 + ($i * 5) ]]
+		}
+		#end added by Bulat
+
 
 			# update configuration parameters
 			set m 0
@@ -224,6 +268,41 @@ set new_type_design_flow [lindex $data [expr ($new_num_input_vectors * 5) + ($ne
 				}
 				incr m
 			}
+
+
+			#added by Bulat
+			set m 0
+			foreach i $new_soc_input_vectors {
+				set position [lsearch -exact $old_soc_input_vectors $i]
+				puts $position
+				if {$position !=-1} {
+					set old_soc_input_vectors [lreplace $old_soc_input_vectors $position $position $i]
+					set old_soc_input_vectors_length [lreplace $old_soc_input_vectors_length $position $position [lindex $new_soc_input_vectors_length $m]]
+				} else {
+				
+					set tmp_error ""
+					append tmp_error " -E- NO input vector " $i " found. Use the -usage option for more details."
+					error $tmp_error
+				}
+				incr m
+			}
+			
+			set m 0
+			foreach i $new_soc_output_vectors {
+				set position [lsearch -exact $old_soc_output_vectors $i]
+				if {$position !=-1} {
+					set old_soc_output_vectors [lreplace $old_soc_output_vectors $position $position $i]
+					set old_soc_output_vectors_length [lreplace $old_soc_output_vectors_length $position $position [lindex $new_soc_output_vectors_length $m]]
+				} else {
+					set tmp_error ""
+					append tmp_error " -E- NO output vector " $i " found. Use the -usage option for more details."
+					error $tmp_error
+				}
+				incr m
+			}
+			
+			
+			#end added by Bulat
 			
 			set input_vectors $old_input_vectors 
 			set input_vectors_length $old_input_vectors_length 
@@ -243,6 +322,14 @@ set new_type_design_flow [lindex $data [expr ($new_num_input_vectors * 5) + ($ne
 			set type_test $new_type_test
 			set type_design_flow $old_type_design_flow
 			set type_template $old_type_template
+
+
+			#added by Bulat
+			set soc_input_vectors $old_soc_input_vectors
+			set soc_input_vectors_length $old_soc_input_vectors_length
+			set soc_output_vectors $old_soc_output_vectors
+			set soc_output_vectors_length $old_soc_output_vectors_length
+			#end added by Bulat
 
 
 
@@ -269,7 +356,9 @@ set new_type_design_flow [lindex $data [expr ($new_num_input_vectors * 5) + ($ne
 			if {$count_is_fix==[expr $old_num_input_vectors+$old_num_output_vectors] || $count_is_float==[expr $old_num_input_vectors+$old_num_output_vectors]} {
 
 				set type_design_flow "matlab"
-				[tclapp::icl::protoip::make_template::make_project_configuration_parameters_dat $r_project_name $input_vectors $input_vectors_length $input_vectors_type $input_vectors_integer_length $input_vectors_fraction_length $output_vectors $output_vectors_length $output_vectors_type $output_vectors_integer_length $output_vectors_fraction_length $fclk $FPGA_name $board_name $type_eth $mem_base_address $num_test $type_test $type_template $type_design_flow]
+				#[tclapp::icl::protoip::make_template::make_project_configuration_parameters_dat $r_project_name $input_vectors $input_vectors_length $input_vectors_type $input_vectors_integer_length $input_vectors_fraction_length $output_vectors $output_vectors_length $output_vectors_type $output_vectors_integer_length $output_vectors_fraction_length $fclk $FPGA_name $board_name $type_eth $mem_base_address $num_test $type_test $type_template $type_design_flow]
+				[tclapp::icl::protoip::make_template::make_project_configuration_parameters_dat $r_project_name $input_vectors $input_vectors_length $input_vectors_type $input_vectors_integer_length $input_vectors_fraction_length $output_vectors $output_vectors_length $output_vectors_type $output_vectors_integer_length $output_vectors_fraction_length $fclk $FPGA_name $board_name $type_eth $mem_base_address $num_test $type_test $type_template $type_design_flow $soc_input_vectors $soc_input_vectors_length $soc_output_vectors $soc_output_vectors_length]
+				
 				[::tclapp::icl::protoip::make_template::make_ip_configuration_parameters_readme_txt $r_project_name]
 				# update ip_design/src/foo_data.h file
 				[::tclapp::icl::protoip::make_template::make_foo_data_h $r_project_name]

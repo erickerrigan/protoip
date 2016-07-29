@@ -310,12 +310,14 @@ for {set i 0} {$i < $new_num_soc_output_vectors} {incr i} {
 			set type_test $old_type_test
 			set type_design_flow $old_type_design_flow
 			set type_template $old_type_template
+
 			
+			#added by Bulat
 			set soc_input_vectors $old_soc_input_vectors
 			set soc_input_vectors_length $old_soc_input_vectors_length
 			set soc_output_vectors $old_soc_output_vectors
 			set soc_output_vectors_length $old_soc_output_vectors_length
-
+			#end added by Bulat
 
 
 			set str_fix "fix"
