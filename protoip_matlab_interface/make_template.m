@@ -21,10 +21,10 @@ function make_template(varargin)
 %                            Repeat the command for every output to update
 %                            All inputs and outputs must be of the same type: 
 %                            float or fix
-%  ['soc_input', 'value']      - SoC input vector name,size and type separated by : symbol         
-%                                Repeat the command for every SoC input vector to update
-%  ['soc_output', 'value']     - Soc output vector name,size and type separated by : symbol
-%                                Repeat the command for every output to update 
+%  ['soc_input', 'value']  - SoC input vector name,size and type separated by : symbol         
+%                            Repeat the command for every SoC input vector to update
+%  ['soc_output', 'value'] - Soc output vector name,size and type separated by : symbol
+%                            Repeat the command for every output to update 
 %  Description: 
 %   Build the IP prototype project template in the [WORKING DIRECTORY] 
 %   according to the specified input and outputs vectors.
