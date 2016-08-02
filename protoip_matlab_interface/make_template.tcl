@@ -116,7 +116,7 @@ foreach i $new_output_vectors_type {
 				}
 			}
 			
-			if {$type_template == "PL"} {
+			if {$type_template == "PL" || $type_template == "SOC"} {
 		
 			if {$count_is_fix==[expr $num_input_vectors+$num_output_vectors] || $count_is_float==[expr $num_input_vectors+$num_output_vectors]} {
 

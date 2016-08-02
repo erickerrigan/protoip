@@ -187,24 +187,26 @@ nargin=length(varargin);
         fprintf(fid,'%s\n',to);
 		
 		%added by Bulat
-		fprintf(fid,'#soc_Input\n');
-        fprintf(fid,'%d\n',length(soc_input_vectors));
-        for i=1:length(soc_input_vectors)
-          fprintf(fid,'%s\n',char(soc_input_vectors(i)));  
-          fprintf(fid,'%s\n',char(soc_input_vectors_length(i)));
-          fprintf(fid,'0\n');
-          fprintf(fid,'0\n');
-          fprintf(fid,'0\n');
-        end
-		
-		fprintf(fid,'#soc_Output\n');
-        fprintf(fid,'%d\n',length(soc_output_vectors));
-        for i=1:length(soc_output_vectors)
-          fprintf(fid,'%s\n',char(soc_output_vectors(i)));  
-          fprintf(fid,'%s\n',char(soc_output_vectors_length(i)));
-          fprintf(fid,'0\n');
-          fprintf(fid,'0\n');
-          fprintf(fid,'0\n');
+        if(strcmp(type_template,'SOC'))
+    		fprintf(fid,'#soc_Input\n');
+            fprintf(fid,'%d\n',length(soc_input_vectors));
+            for i=1:length(soc_input_vectors)
+              fprintf(fid,'%s\n',char(soc_input_vectors(i)));  
+              fprintf(fid,'%s\n',char(soc_input_vectors_length(i)));
+              fprintf(fid,'0\n');
+              fprintf(fid,'0\n');
+              fprintf(fid,'0\n');
+            end
+    		
+    		fprintf(fid,'#soc_Output\n');
+            fprintf(fid,'%d\n',length(soc_output_vectors));
+            for i=1:length(soc_output_vectors)
+              fprintf(fid,'%s\n',char(soc_output_vectors(i)));  
+              fprintf(fid,'%s\n',char(soc_output_vectors_length(i)));
+              fprintf(fid,'0\n');
+              fprintf(fid,'0\n');
+              fprintf(fid,'0\n');
+            end
         end
 		%end added by Bulat
 
