@@ -9,9 +9,9 @@ function soc_prototype_load(varargin)
 %                               ('udp' for UDP-IP connection or 'tcp' for TCP-IP connection)
 %                               It's a mandatory field
 % ['mem_base_address', 'value'] - DDR3 memory base address
-%  ['soc_input', 'value']      - SoC input vector name,size and type separated by : symbol         
+%  ['soc_input', 'value']      - SoC input vector name and size separated by : symbol         
 %                                Repeat the command for every SoC input vector to update
-%  ['soc_output', 'value']     - SoC output vector name,size and type separated by : symbol
+%  ['soc_output', 'value']     - SoC output vector name and size separated by : symbol
 %                                Repeat the command for every output to update
 
 %  Description: 

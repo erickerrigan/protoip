@@ -1,9 +1,8 @@
 function make_template(varargin)
 
 %%  Usage: ip_design_build
-%  'type', 'value'         - Template project type. 
-%                            Now only a template with the algorithm running inside 
-%                            the FPGA programmable logic is supported ('PL').
+%  'type', 'value'         - Template project type. ('PL' or 'SOC')
+%                      
 %                            It's a mandatory field
 %  'project_name', 'value' - Project name
 %                            It's a mandatory field
@@ -67,7 +66,7 @@ function make_template(varargin)
 %	1 output on SoC level
 %   soc_y0[2] floating point
 %
-%   make_template('type','PL','project_name','my_project0','input','x0:1:float','input','x1:2:float','output','y0:4:float,'soc_input','soc_x0:1','soc_output','soc_y0:2')
+%   make_template('type','SOC','project_name','my_project0','input','x0:1:float','input','x1:2:float','output','y0:4:float,'soc_input','soc_x0:1','soc_output','soc_y0:2')
 
 
 %% save temporary file with input arguments   
