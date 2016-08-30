@@ -42,6 +42,18 @@ urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/protoip_matla
 urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/protoip_matlab_interface/make_template.m', 'protoip_matlab_interface/make_template.m');
 urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/protoip_matlab_interface/make_template.tcl', 'protoip_matlab_interface/make_template.tcl');
 
+
+% added by Bulat
+urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/protoip_matlab_interface/make_template.m', 'protoip_matlab_interface/soc_prototype_load.m');
+urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/protoip_matlab_interface/make_template.tcl', 'protoip_matlab_interface/soc_prototype_load.tcl');
+
+urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/protoip_matlab_interface/make_template.m', 'protoip_matlab_interface/soc_prototype_load_debug.m');
+urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/protoip_matlab_interface/make_template.tcl', 'protoip_matlab_interface/soc_prototype_load_debug.tcl');
+
+urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/protoip_matlab_interface/make_template.m', 'protoip_matlab_interface/soc_prototype_test.m');
+urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/protoip_matlab_interface/make_template.tcl', 'protoip_matlab_interface/soc_prototype_test.tcl');
+%end added by Bulat
+
 urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/protoip_matlab_interface/protoip_matlab_test.m', 'protoip_matlab_interface/protoip_matlab_test.m');
 
 urlwrite('https://raw.githubusercontent.com/asuardi/protoip/master/protoip_matlab_interface/protoip_matlab_installer.tcl', 'protoip_matlab_interface/protoip_matlab_installer.tcl');
