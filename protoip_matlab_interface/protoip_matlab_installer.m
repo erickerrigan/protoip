@@ -106,7 +106,7 @@ end
 
 
 %% install protoip app. It is required xilinx Vivado software
-str = strcat(pwd,'\protoip_matlab_interface\protoip_matlab_installer.tcl');
-system(sprintf('vivado -mode tcl -source %s', str))
+%str = strcat(pwd,'\protoip_matlab_interface\protoip_matlab_installer.tcl');
+%system(sprintf('vivado -mode tcl -source %s', str))
 
 disp('protoip installed successfully')
