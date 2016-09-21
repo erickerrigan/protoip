@@ -35,17 +35,12 @@ function ip_design_build(varargin)
 %    ip_design_build('project_name','my_project0')
 %    ip_design_build('project_name','my_project0','input','x0:5:fix:10:10','input','x1:5:fix:10:10','output','y0:9:fix:9:9','fclk', 133, 'FPGA_name', 'xc7z020clg484-1')
 
-%% save temporary file with input arguments   
-project_name=make_configuration_parameters_matlab_interface(varargin);
-    
-%call Vivado icl::protoip:ip_design_build function
-str = which('ip_design_build');
-str=str(1:end-2);
-str=strcat(str,'.tcl');
-system(sprintf('vivado -mode tcl -source %s', str))
+%% call Matlab to Vivado interface file
+tmp_cell = {mfilename};
+matlab_vivado;
 
 %export timing, resources and power information to Matlab workspace
-varargin=varargin{1,1};
+%varargin=varargin{:};
 nargin=length(varargin);
 parameters=[];
 values=[];

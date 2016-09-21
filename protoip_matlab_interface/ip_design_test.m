@@ -42,19 +42,11 @@ function ip_design_test(varargin)
 %    ip_design_test('project_name','my_project0','type_test','c','num_test',1)
 %    ip_design_test('project_name','my_project0','type_test','c','num_test',1,'input','x0:5:fix:10:10','input','x1:5:fix:10:10','output','y0:9:fix:9:9','fclk',133,'FPGA_name','xc7z020clg484-1')
 
-%% save temporary file with input arguments   
-project_name=make_configuration_parameters_matlab_interface(varargin);
-    
-%call Vivado to configure icl::protoip:ip_design_test function
-str = which('ip_design_test');
-str=str(1:end-2);
-str=strcat(str,'.tcl');
-system(sprintf('vivado -mode tcl -source %s', str))
 
-cd ip_design/src;
-clear functions
-test_HIL(project_name)
-cd ../..
+%% call Matlab to Vivado interface file
+tmp_cell = {mfilename};
+matlab_vivado;
+
 
 end
 

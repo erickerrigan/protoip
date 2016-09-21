@@ -69,14 +69,9 @@ function make_template(varargin)
 %   make_template('type','SOC','project_name','my_project0','input','x0:1:float','input','x1:2:float','output','y0:4:float,'soc_input','soc_x0:1','soc_output','soc_y0:2')
 
 
-%% save temporary file with input arguments   
-project_name=make_configuration_parameters_matlab_interface(varargin);
-    
-%call Vivado icl::protoip:make_template function
-str = which('make_template');
-str=str(1:end-2);
-str=strcat(str,'.tcl');
-system(sprintf('vivado -mode tcl -source %s', str))
+%% call Matlab to Vivado interface file
+tmp_cell = {mfilename};
+matlab_vivado;
 
 
 end

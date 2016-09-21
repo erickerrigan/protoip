@@ -20,14 +20,9 @@ function ip_prototype_build_debug(varargin)
 
 
 
-%% save temporary file with input arguments   
-project_name=make_configuration_parameters_matlab_interface(varargin);
-    
-%call Vivado icl::protoip:ip_design_delete function
-str = which('ip_prototype_build_debug');
-str=str(1:end-2);
-str=strcat(str,'.tcl');
-system(sprintf('vivado -mode tcl -source %s', str))
+%% call Matlab to Vivado interface file
+tmp_cell = {mfilename};
+matlab_vivado;
 
 
 end

@@ -31,17 +31,12 @@ function ip_prototype_build(varargin)
 %   ip_prototype_build('project_name','my_project0','board_name','zedboard')
 
 
-%% save temporary file with input arguments   
-project_name=make_configuration_parameters_matlab_interface(varargin);
-    
-%call Vivado icl::protoip:ip_design_delete function
-str = which('ip_prototype_build');
-str=str(1:end-2);
-str=strcat(str,'.tcl');
-system(sprintf('vivado -mode tcl -source %s', str))
+%% call Matlab to Vivado interface file
+tmp_cell = {mfilename};
+matlab_vivado;
 
 %export timing, latency and resources information to Matlab workspace
-varargin=varargin{1,1};
+%varargin=varargin{1,1};
 nargin=length(varargin);
 parameters=[];
 values=[];

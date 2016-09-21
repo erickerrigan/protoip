@@ -22,19 +22,8 @@ function soc_prototype_test(varargin)
 %   soc_prototype_test('project_name','my_project0','board_name','zedboard','num_test','1')
 
 
-%% save temporary file with input arguments   
-project_name=make_configuration_parameters_matlab_interface(varargin);
-    
-str = which('soc_prototype_test');
-str=str(1:end-2);
-str=strcat(str,'.tcl');
-system(sprintf('vivado -mode tcl -source %s', str))
-
-cd soc_prototype/src;
-clear functions
-test_HIL(project_name)
-cd ../..
-
+tmp_cell = {mfilename};
+matlab_vivado;
 
 end
 
