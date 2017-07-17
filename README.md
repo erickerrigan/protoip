@@ -14,13 +14,11 @@ The [wiki](https://github.com/asuardi/protoip/wiki/Home) contains documentation 
 # How to cite
 
 ```
-@INPROCEEDINGS{7330928, 
-author={A. Suardi and E. C. Kerrigan and G. A. Constantinides}, 
-booktitle={European Control Conference (ECC)}, 
-title={Fast FPGA prototyping toolbox for embedded optimization}, 
-year={2015}, 
-pages={2589-2594}, 
-doi={10.1109/ECC.2015.7330928}, 
+@INPROCEEDINGS{protoip, 
+author={B. Khusainov and E. C. Kerrigan and A. Suardi and  G. A. Constantinides}, 
+booktitle={IFAC World Congress 2017}, 
+title={Nonlinear predictive control on a heterogeneous computing platform}, 
+year={2017}, 
 month={July},}
 ```
 ----------
