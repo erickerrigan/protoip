@@ -10,7 +10,7 @@ function test_HIL(project_name)
 
 
 addpath('../../.metadata');
-mex FPGAclientMATLAB.c
+mex CFLAGS="$CFLAGS -std=c99" FPGAclientMATLAB.c
 load_configuration_parameters(project_name)
 
 
@@ -219,15 +219,16 @@ for i=1:NUM_TEST
 end
 
 
-load ..\..\ip_prototype\test\results\lqr_controller\fpga_x0_in_log.dat
-load ..\..\ip_prototype\test\results\lqr_controller\matlab_x0_in_log.dat
+if strcmp(TYPE_DESIGN_FLOW,'vivado') == 0
+    load ../../ip_prototype/test/results/lqr_controller/fpga_x0_in_log.dat
+    load ../../ip_prototype/test/results/lqr_controller/matlab_x0_in_log.dat
 
-plot(fpga_x0_in_log);
-title('FPGA test');
-figure
-plot(matlab_x0_in_log);
-title('Matlab test');
-
+    plot(fpga_x0_in_log);
+    title('FPGA test');
+    figure
+    plot(matlab_x0_in_log);
+    title('Matlab test');
+end
 
 
 
@@ -241,11 +242,11 @@ fprintf(fid, 'locked write\n');
 fclose(fid);
 
 if strcmp(TYPE_DESIGN_FLOW,'vivado')
+    disp('Test finished, exiting to Vivado');
 	quit;
 end
 
-
-
+disp('Test finished, exiting to MATLAB');
 
 
 end

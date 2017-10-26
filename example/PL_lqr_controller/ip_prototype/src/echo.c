@@ -219,6 +219,24 @@ void udp_server_function(void *arg, struct udp_pcb *pcb,
 							}
 							else
 								printf("ERROR: reprogram the FPGA !\n"); //should be added the IP reset procedure
+							//Initialise output vector
+							for(i=0;i<ETH_PACKET_LENGTH;i++)
+							{
+								tmp_float=1.0;
+								outvec[i]=*(Xint32*)&tmp_float;
+								}
+							
+							// send back a dummy packet
+							// We now need to return the result
+							pnew.next = NULL;
+							pnew.payload = (unsigned char *)outvec;
+							pnew.len = ETH_PACKET_LENGTH*sizeof(Xint32);
+							pnew.type = PBUF_RAM;
+							pnew.tot_len = pnew.len;
+							pnew.ref = 1;
+							pnew.flags = 0;
+
+							udp_sendto(pcb, &pnew, addr, port);
 
 						}
 					else if (packet_type==2) //start IP
@@ -252,6 +270,24 @@ void udp_server_function(void *arg, struct udp_pcb *pcb,
 									printf ("IP Timer: beginning of the counter is : %d \n", CntValue1);
 									printf ("IP Timer: end of the counter is : %d \n", CntValue2);
 								}
+							//Initialise output vector
+							for(i=0;i<ETH_PACKET_LENGTH;i++)
+							{
+								tmp_float=1.0;
+								outvec[i]=*(Xint32*)&tmp_float;
+							}
+							
+							// send back a dummy packet
+							// We now need to return the result
+							pnew.next = NULL;
+							pnew.payload = (unsigned char *)outvec;
+							pnew.len = ETH_PACKET_LENGTH*sizeof(Xint32);
+							pnew.type = PBUF_RAM;
+							pnew.tot_len = pnew.len;
+							pnew.ref = 1;
+							pnew.flags = 0;
+
+							udp_sendto(pcb, &pnew, addr, port);
 
 					}
 					else if (packet_type==3) //write data DDR
@@ -297,6 +333,24 @@ void udp_server_function(void *arg, struct udp_pcb *pcb,
 							default:
 							break;
 						}
+						//Initialise output vector
+						for(i=0;i<ETH_PACKET_LENGTH;i++)
+						{
+							tmp_float=1.0;
+							outvec[i]=*(Xint32*)&tmp_float;
+						}
+						
+						// send back a dummy packet
+						// We now need to return the result
+						pnew.next = NULL;
+						pnew.payload = (unsigned char *)outvec;
+						pnew.len = ETH_PACKET_LENGTH*sizeof(Xint32);
+						pnew.type = PBUF_RAM;
+						pnew.tot_len = pnew.len;
+						pnew.ref = 1;
+						pnew.flags = 0;
+
+						udp_sendto(pcb, &pnew, addr, port);
 
 					}
 
@@ -426,166 +480,150 @@ err_t tcp_server_function(void *arg, struct tcp_pcb *tpcb,
 		/* Pick up a pointer to the payload */
 		payload_ptr = (unsigned char *)p->payload;
 
-		//Free the packet buffer
-		pbuf_free(p);
+			//Free the packet buffer
+			pbuf_free(p);
 
-		// Get the payload out
-		for(k1=0;k1<ETH_PACKET_LENGTH;k1++){
-			get_payload();
-			inputvec[k1] = payload_temp;
-		}
-
-
-			//extract informations form the input packet
-			tmp_float=*(float*)&inputvec[ETH_PACKET_LENGTH-2];
-			packet_type=(int)tmp_float & 0x0000FFFF;
-			packet_internal_ID=((int)tmp_float & 0xFFFF0000) >> 16; //if write packet_type, packet_num is the data vector ID
-
-			tmp_float=*(float*)&inputvec[ETH_PACKET_LENGTH-1];
-			packet_internal_ID_offset=(int)tmp_float; //if write packet_type, packet_num is the data vector ID
-
-		if (DEBUG){
-		printf("\n");
-		printf("Received packet:\n");
-		printf("packet_type=%x\n",packet_type);
-		printf("packet_internal_ID=%x\n",packet_internal_ID);
-		printf("packet_internal_ID_offset=%x\n",packet_internal_ID_offset);
-		}
-
-		if (packet_type==1) //reset IP
-			{
-
-				if (DEBUG)
-				printf("Reset IP ...\n");
-
-				if (XFoo_IsIdle(&xcore)==1)
-				{
-					if (DEBUG){
-						printf("The core is ready to be used\n");
-					}
-				}
-				else
-					printf("ERROR: reprogram the FPGA !\n"); //should be added the IP reset procedure
-
+			// Get the payload out
+			for(k1=0;k1<ETH_PACKET_LENGTH;k1++){
+				get_payload();
+				inputvec[k1] = payload_temp;
 			}
-		else if (packet_type==2) //start IP
-				{
 
-					if (DEBUG)
-					printf("Start IP ...\n");
+				//extract informations form the input packet
+				tmp_float=*(float*)&inputvec[ETH_PACKET_LENGTH-2];
+				packet_type=(int)tmp_float & 0x0000FFFF;
+				packet_internal_ID=((int)tmp_float & 0xFFFF0000) >> 16; //if write packet_type, packet_num is the data vector ID
 
-					XFoo_Set_byte_x0_in_offset(&xcore,x0_IN_DEFINED_MEM_ADDRESS);
-					XFoo_Set_byte_x_ref_in_offset(&xcore,x_ref_IN_DEFINED_MEM_ADDRESS);
-					XFoo_Set_byte_u_out_offset(&xcore,u_OUT_DEFINED_MEM_ADDRESS);
+				tmp_float=*(float*)&inputvec[ETH_PACKET_LENGTH-1];
+				packet_internal_ID_offset=(int)tmp_float; //if write packet_type, packet_num is the data vector ID
+
+			if (DEBUG){
+				printf("\n");
+				printf("Received packet:\n");
+				printf("packet_type=%x\n",packet_type);
+				printf("packet_internal_ID=%x\n",packet_internal_ID);
+				printf("packet_internal_ID_offset=%x\n",packet_internal_ID_offset);
+			}
 
 
-					//Start IP core
-					XFoo_Start(&xcore);
+			if (packet_type==1) //reset IP
+						{
 
-					// preload the count down counter
-					XScuTimer_LoadTimer(TimerInstancePtr, 100000000);
-					//read timer value
-					CntValue1 = XScuTimer_GetCounterValue(TimerInstancePtr);
+							if (DEBUG)
+								printf("Reset IP ...\n");
 
-					//Start timer
-					CntValue1 = IpTimer(TIMER_DEVICE_ID,0);
+							if (XFoo_IsIdle(&xcore)==1)
+							{
+								if (DEBUG){
+									printf("The core is ready to be used\n");
+								}
+							}
+							else
+								printf("ERROR: reprogram the FPGA !\n"); //should be added the IP reset procedure
 
-					//Start IP core
-					XFoo_Start(&xcore);
+						}
+					else if (packet_type==2) //start IP
+							{
 
-					//wait until the IP has finished. If an Ethernet read request arrive, it will be served only when the IP will finish. FPGAclientAPI has a timeout of 1 day.
-					while (XFoo_IsIdle(&xcore)!=1)
+								if (DEBUG)
+									printf("Start IP ...\n");
+
+								XFoo_Set_byte_x0_in_offset(&xcore,x0_IN_DEFINED_MEM_ADDRESS);
+								XFoo_Set_byte_x_ref_in_offset(&xcore,x_ref_IN_DEFINED_MEM_ADDRESS);
+								XFoo_Set_byte_u_out_offset(&xcore,u_OUT_DEFINED_MEM_ADDRESS);
+
+								//Start timer
+								CntValue1 = IpTimer(TIMER_DEVICE_ID,0);
+
+								//Start IP core
+								XFoo_Start(&xcore);
+
+								//wait until the IP has finished. If an Ethernet read request arrive, it will be served only when the IP will finish. FPGAclientAPI has a timeout of 1 day.
+								while (XFoo_IsIdle(&xcore)!=1)
+								{
+									if (DEBUG)
+										printf("Wait until the IP has finished ...\n");
+								}
+
+								//Stop timer
+								CntValue2 = IpTimer(TIMER_DEVICE_ID,1);
+
+								if (DEBUG)
+								{
+									printf ("IP Timer: beginning of the counter is : %d \n", CntValue1);
+									printf ("IP Timer: end of the counter is : %d \n", CntValue2);
+								}
+
+					}
+					else if (packet_type==3) //write data DDR
 					{
+
 						if (DEBUG)
-							printf("Wait until the IP has finished ...\n");
-					}
+						printf("Write data to DDR ...\n");
 
-					//Stop timer
-					CntValue2 = IpTimer(TIMER_DEVICE_ID,1);
-
-					if (DEBUG)
-					{
-						printf ("IP Timer: beginning of the counter is : %d \n", CntValue1);
-						printf ("IP Timer: end of the counter is : %d \n", CntValue2);
-					}
-
-
-
-				}
-
-		else if (packet_type==3) //write data DDR
-		{
-
-			if (DEBUG)
-			printf("Write data to DDR ...\n");
-
-			switch (packet_internal_ID)
-			{
-
-
-
-			case 0: //x0_in
-			if (DEBUG)
-					printf("write x0_in\n\r");
+						switch (packet_internal_ID)
+						{
+							case 0: //x0_in
+							if (DEBUG)
+									printf("write x0_in\n\r");
 
 							if (FLOAT_FIX_X0_IN==1) {
 								for (i=0; i<ETH_PACKET_LENGTH-2; i++)
 								{
 									tmp_float=*(float*)&inputvec[i];
-									inputvec_fix[i]=(Xint32)(tmp_float*pow(2,X0_IN_FRACTIONLENGTH));
+									inputvec_fix[i]=(int32_t)(tmp_float*pow(2,X0_IN_FRACTIONLENGTH));
 								}
 								memcpy(x0_in_ptr_ddr+(ETH_PACKET_LENGTH-2)*packet_internal_ID_offset,inputvec_fix,(ETH_PACKET_LENGTH-2)*4);
 							} else { //floating-point
 								memcpy(x0_in_ptr_ddr+(ETH_PACKET_LENGTH-2)*packet_internal_ID_offset,inputvec,(ETH_PACKET_LENGTH-2)*4);
 							}
-			break;
+							break;
 							
-			case 1: //x_ref_in
-			if (DEBUG)
-					printf("write x_ref_in\n\r");
+							case 1: //x_ref_in
+							if (DEBUG)
+									printf("write x_ref_in\n\r");
 
 							if (FLOAT_FIX_X_REF_IN==1) {
 								for (i=0; i<ETH_PACKET_LENGTH-2; i++)
 								{
 									tmp_float=*(float*)&inputvec[i];
-									inputvec_fix[i]=(Xint32)(tmp_float*pow(2,X_REF_IN_FRACTIONLENGTH));
+									inputvec_fix[i]=(int32_t)(tmp_float*pow(2,X_REF_IN_FRACTIONLENGTH));
 								}
 								memcpy(x_ref_in_ptr_ddr+(ETH_PACKET_LENGTH-2)*packet_internal_ID_offset,inputvec_fix,(ETH_PACKET_LENGTH-2)*4);
 							} else { //floating-point
 								memcpy(x_ref_in_ptr_ddr+(ETH_PACKET_LENGTH-2)*packet_internal_ID_offset,inputvec,(ETH_PACKET_LENGTH-2)*4);
 							}
-			break;
+							break;
 							
+							default:
+							break;
+						}
 
-			default:
-				break;
-			}
+					}
 
-		}
+					else if (packet_type==4) //read data from DDR
+					{
+						
+						tmp_float=((float)CntValue1-(float)CntValue2) / (float)EE_TICKS_PER_SEC;
+						if (DEBUG)
+							printf("IP time = %f [s]\n",tmp_float);
 
-		else if (packet_type==4) //read data from DDR
-		{
+						outvec[ETH_PACKET_LENGTH_RECV-1]=*(Xint32*)&tmp_float;  //time
 
-			tmp_float=((float)CntValue1-(float)CntValue2) / (float)EE_TICKS_PER_SEC;
-			if (DEBUG)
-				printf("IP time = %f [s]\n",tmp_float);
 
-			outvec[ETH_PACKET_LENGTH_RECV-1]=*(Xint32*)&tmp_float;  //time
-
-			//Initialise output vector
-			for(i=0;i<ETH_PACKET_LENGTH_RECV-2;i++)
-			{
-				tmp_float=1.0;
-				outvec[i]=*(Xint32*)&tmp_float;
-			}
-			
-
-			switch (packet_internal_ID)
-			{
-
-				case 0: //u_in
-				if (DEBUG)
-					printf("read u_out\n\r");
+						//Initialise output vector
+						for(i=0;i<ETH_PACKET_LENGTH_RECV-2;i++)
+						{
+							tmp_float=1.0;
+							outvec[i]=*(Xint32*)&tmp_float;
+						}
+						
+						
+						switch (packet_internal_ID)
+						{
+							case 0: //u_in
+							if (DEBUG)
+								printf("read u_out\n\r");
 							memcpy(outvec_fix,u_out_ptr_ddr+(ETH_PACKET_LENGTH_RECV-2)*packet_internal_ID_offset,(ETH_PACKET_LENGTH_RECV-2)*4);
 							for (i=0; i<ETH_PACKET_LENGTH_RECV-2; i++)
 							{
@@ -596,28 +634,28 @@ err_t tcp_server_function(void *arg, struct tcp_pcb *tpcb,
 									outvec[i]=outvec_fix[i];
 								}
 							}
-				break;
+							break;
 							
-				default:
-				break;
-			}
-
+							default:
+							break;
+						}
+						
+						
 
 			// send back the payload
 			err = tcp_write(tpcb, outvec, ETH_PACKET_LENGTH*sizeof(Xint32), TCP_WRITE_FLAG_MORE);
 			tcp_output(tpcb); //send data now
 
 		}
-		else if (packet_type==5) //read data from DDR
-		{
+					else if (packet_type==5) //read data from DDR
+					{
 
-			//Initialise output vector
-			for(i=0;i<ETH_PACKET_LENGTH;i++)
-			{
-				tmp_float=1.0;
-				outvec[i]=*(Xint32*)&tmp_float;
-			}
-			
+						//Initialise output vector
+						for(i=0;i<ETH_PACKET_LENGTH;i++)
+						{
+							tmp_float=1.0;
+							outvec[i]=*(Xint32*)&tmp_float;
+						}
 
 			// send back the payload
 			err = tcp_write(tpcb, outvec, ETH_PACKET_LENGTH*sizeof(Xint32), TCP_WRITE_FLAG_MORE);
