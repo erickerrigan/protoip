@@ -26,6 +26,7 @@
 #include<string.h>
 #include<fcntl.h>
 #include <math.h>
+#include "mex.h"
 
 
 ////////////////////////////////////////////////////////////
@@ -76,7 +77,7 @@ int FPGAclient(double input_data[], unsigned packet_input_size, unsigned Packet_
 	char *FPGA_ip_address;
 	unsigned i;
 	unsigned j;
-	int flag;
+	int flag=0;
 	int count_send;
 	double flag_IP_running;
 	
@@ -110,9 +111,21 @@ int FPGAclient(double input_data[], unsigned packet_input_size, unsigned Packet_
 					
 					// main call
 					if (FPGA_link==1) //TCP interface
-						flag=TCPclient_wrap(FPGA_ip_address,FPGA_port_number,input_data_eth,Packet_type,output_data_eth,float_fix,fraction_length);
+				    {
+				    	do
+				    	{
+							flag=TCPclient_wrap(FPGA_ip_address,FPGA_port_number,input_data_eth,Packet_type,output_data_eth,float_fix,fraction_length);
+				    	}while(flag);
+				    }
 				    else
-					   flag=UDPclient_wrap(FPGA_ip_address,FPGA_port_number,input_data_eth,Packet_type,output_data_eth,float_fix,fraction_length);
+				    {
+				    	do
+				    	{
+					   		flag=UDPclient_wrap(FPGA_ip_address,FPGA_port_number,input_data_eth,Packet_type,output_data_eth,float_fix,fraction_length);
+				    	}while(flag);
+				    }
+				    
+				    
 	 
 					*FPGA_time=output_data_eth[ETH_PACKET_LENGTH_RECV-1];
 		    
@@ -132,22 +145,6 @@ int FPGAclient(double input_data[], unsigned packet_input_size, unsigned Packet_
 		for (i=0; i<packet_input_size; i=i+ETH_PACKET_LENGTH-2)
 		{
 		   
-		   count_send++;
-				if ( count_send == 8 ) //every 8 packets sent, FPGAclientAPI wait the server have finished all the writing operations.
-				{
-	    			count_send=0;
-					Packet_type=5;
-					//vector label
-					input_data_eth[ETH_PACKET_LENGTH-2]=(double)pow(2,16)*packet_internal_ID+Packet_type;
-					input_data_eth[ETH_PACKET_LENGTH-1]=packet_internal_ID_offset;
-					// main call, it is a read request: blocking operation
-					if (FPGA_link==1) //TCP interface
-					   flag=TCPclient_wrap(FPGA_ip_address,FPGA_port_number,input_data_eth,Packet_type,output_data_eth,float_fix,fraction_length);
-					else
-						flag=UDPclient_wrap(FPGA_ip_address,FPGA_port_number,input_data_eth,Packet_type,output_data_eth,float_fix,fraction_length);
-		   
-					Packet_type=3;
-				 }
 		
 		    //fill in the vector buffer to be sent to Ethernet
 		    
@@ -163,10 +160,19 @@ int FPGAclient(double input_data[], unsigned packet_input_size, unsigned Packet_
 
 		    // main call 
 		    if (FPGA_link==1) //TCP interface
-		       flag=TCPclient_wrap(FPGA_ip_address,FPGA_port_number,input_data_eth,Packet_type,output_data_eth,float_fix,fraction_length);
+		   {
+				do
+				{
+		       		flag=TCPclient_wrap(FPGA_ip_address,FPGA_port_number,input_data_eth,Packet_type,output_data_eth,float_fix,fraction_length);
+				}while(flag);
+		   }
 		   else
-		       flag=UDPclient_wrap(FPGA_ip_address,FPGA_port_number,input_data_eth,Packet_type,output_data_eth,float_fix,fraction_length);
-		   
+		   {
+				do
+				{
+					flag=UDPclient_wrap(FPGA_ip_address,FPGA_port_number,input_data_eth,Packet_type,output_data_eth,float_fix,fraction_length);
+				}while(flag);
+			}
 		   packet_internal_ID_offset++;
 
 		}
@@ -253,7 +259,7 @@ int UDPclient_wrap(char ip_address[], unsigned port_number, double din[ETH_PACKE
 
 	server = gethostbyname(ip_address);
 	port_number = port_number;
-	timeout=86400; //timeout in seconds: 1 day
+	timeout=20; //timeout in seconds: 1 day
 
 	
 
@@ -330,7 +336,7 @@ int UDPclient_wrap(char ip_address[], unsigned port_number, double din[ETH_PACKE
     
     // --------read from DDR--------
     
-    if (Packet_type==4 || Packet_type==5)
+    if (1)
     {
     
         ss = select(socket_handle+1, &Reader, NULL, NULL, &tv);
@@ -441,7 +447,7 @@ int TCPclient_wrap(char ip_address[], unsigned port_number,double din[ETH_PACKET
 
 	server = gethostbyname(ip_address);
 	port_number = port_number;
-	timeout=86400; //timeout in seconds: 1 day
+	timeout=20; //timeout in seconds: 1 day
 
 	
 
@@ -534,7 +540,7 @@ int TCPclient_wrap(char ip_address[], unsigned port_number,double din[ETH_PACKET
 
     // --------read from DDR--------
     
-    if (Packet_type==4 || Packet_type==5)
+    if (1)
     {
         
         ss = select(socket_handle+1, &Reader, NULL, NULL, &tv);

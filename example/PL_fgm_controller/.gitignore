@@ -1,0 +1,17 @@
+# Ignore build files
+ip_design/build/*
+ip_design/test/*
+ip_prototype/build/*
+ip_prototype/test/*
+
+# Ignore the Vivado log file
+vivado_hls.log
+
+# Ignore the signal file
+_locked
+
+# Ignore MATLAB temp files
+*.m~
+
+# ignore the MATLAB mex files
+*.mexa64
