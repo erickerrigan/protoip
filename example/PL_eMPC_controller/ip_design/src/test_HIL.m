@@ -10,7 +10,8 @@ function test_HIL(project_name)
 
 
 addpath('../../.metadata');
-mex FPGAclientMATLAB.c
+mex CFLAGS="$CFLAGS -std=c99" FPGAclientMATLAB.c
+%mex FPGAclientMATLAB.c
 load_configuration_parameters(project_name)
 
 

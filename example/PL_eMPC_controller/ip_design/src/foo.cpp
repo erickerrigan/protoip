@@ -37,7 +37,7 @@ void foo	(
 	data_t_interface_x_in  x_in[X_IN_LENGTH];
 	data_t_interface_u_out  u_out[U_OUT_LENGTH];
 
-	data_t_x_in  x_in_int[X_IN_LENGTH];
+	static data_t_x_in  x_in_int[X_IN_LENGTH];
 	data_t_u_out  u_out_int[U_OUT_LENGTH];
 
 	#endif
@@ -46,18 +46,25 @@ void foo	(
 	///////////////////////////////////////
 	//load input vectors from memory (DDR)
 
-	memcpy(x_in,(const data_t_memory*)(memory_inout+byte_x_in_offset/4),X_IN_LENGTH*sizeof(data_t_memory));
+	if(!(byte_x_in_offset & (1<<31)))
+	{
+		memcpy(x_in,(const data_t_memory*)(memory_inout+byte_x_in_offset/4),X_IN_LENGTH*sizeof(data_t_memory));
 
-    //Initialisation: cast to the precision used for the algorithm
-	input_cast_loop_x:for (int i=0; i< X_IN_LENGTH; i++)
-		x_in_int[i]=(data_t_x_in)x_in[i];
+    	//Initialisation: cast to the precision used for the algorithm
+		input_cast_loop_x:for (int i=0; i< X_IN_LENGTH; i++)
+			x_in_int[i]=(data_t_x_in)x_in[i];
 
+	}
+	
 
 	#elif FLOAT_FIX_X_IN == 0
 	///////////////////////////////////////
 	//load input vectors from memory (DDR)
 
-	memcpy(x_in_int,(const data_t_memory*)(memory_inout+byte_x_in_offset/4),X_IN_LENGTH*sizeof(data_t_memory));
+	if(!(byte_x_in_offset & (1<<31)))
+	{
+		memcpy(x_in_int,(const data_t_memory*)(memory_inout+byte_x_in_offset/4),X_IN_LENGTH*sizeof(data_t_memory));
+	}
 
 	#endif
 
@@ -77,16 +84,22 @@ void foo	(
 	///////////////////////////////////////
 	//store output vectors to memory (DDR)
 
-	output_cast_loop_u: for(int i = 0; i <  U_OUT_LENGTH; i++)
-		u_out[i]=(data_t_interface_u_out)u_out_int[i];
+	if(!(byte_u_out_offset & (1<<31)))
+	{
+		output_cast_loop_u: for(int i = 0; i <  U_OUT_LENGTH; i++)
+			u_out[i]=(data_t_interface_u_out)u_out_int[i];
 
-	//write results vector y_out to DDR
-	memcpy((data_t_memory *)(memory_inout+byte_u_out_offset/4),u_out,U_OUT_LENGTH*sizeof(data_t_memory));
+		//write results vector y_out to DDR
+		memcpy((data_t_memory *)(memory_inout+byte_u_out_offset/4),u_out,U_OUT_LENGTH*sizeof(data_t_memory));
 
+	}
 	#elif FLOAT_FIX_U_OUT == 0
 	///////////////////////////////////////
 	//write results vector y_out to DDR
-	memcpy((data_t_memory *)(memory_inout+byte_u_out_offset/4),u_out_int,U_OUT_LENGTH*sizeof(data_t_memory));
+	if(!(byte_u_out_offset & (1<<31)))
+	{
+		memcpy((data_t_memory *)(memory_inout+byte_u_out_offset/4),u_out_int,U_OUT_LENGTH*sizeof(data_t_memory));
+	}
 
 	#endif
 

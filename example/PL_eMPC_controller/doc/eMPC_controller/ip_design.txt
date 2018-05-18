@@ -24,17 +24,45 @@ IP build report: eMPC_controller
 ----------------------------------------------------------
 
 
-clock target (ns): 10.00
-clock estimated (ns): 8.75
+Timing:
+------------------------
+
+* IP
+   target clock period (ns): 10.00
+   estimated clock period (ns): 8.75
+
+	* User function
+	   target clock period (ns): 10.00
+	   estimated clock period (ns): 8.45
+
 Time constraints might be met during IP prototyping. You can reduce clock target period to build a faster design.
 
-latency (clock cycles): 99
-latency (us): 0.99
+
+Latency:
+------------------------
+
+* IP
+   latency (clock cycles): 186
+   latency (us): 1.86
+
+	* User function
+	   latency (clock cycles): 162
+	   latency (us): 1.62
+
 
 Resource utilization:
-BRAM_18K: 4 (1%) used out off 280 available.
-DSP48E: 5 (2%) used out off 220 available.
-FF: 1725 (1%) used out off 106400 available.
-LUT: 2242 (4%) used out off 53200 available.
+------------------------
+
+* IP
+   BRAM_18K: 6 (2%) used out off 280 available.
+   DSP48E: 2 (0%) used out off 220 available.
+   FF: 2326 (2%) used out off 106400 available.
+   LUT: 2311 (4%) used out off 53200 available.
+
+	* User function
+	   BRAM_18K: 4 (1%) used out off 280 available.
+	   DSP48E: 2 (0%) used out off 220 available.
+	   FF: 1337 (1%) used out off 106400 available.
+	   LUT: 1112 (2%) used out off 53200 available.
 
 NOTE: IP design performance might be enhanced by adding directives from Vivado_HLS GUI interface. Run "tclapp::icl::protoip::ip_design_build_debug" to open eMPC_controller with Vivado_HLS GUI interface.
