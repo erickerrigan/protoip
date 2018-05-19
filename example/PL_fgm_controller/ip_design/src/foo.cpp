@@ -44,8 +44,8 @@ void foo	(
 	data_t_interface_num_iter_in  num_iter_in[NUM_ITER_IN_LENGTH];
 	data_t_interface_x_out  x_out[X_OUT_LENGTH];
 
-	data_t_x_in  x_in_int[X_IN_LENGTH];
-	data_t_num_iter_in  num_iter_in_int[NUM_ITER_IN_LENGTH];
+	static data_t_x_in  x_in_int[X_IN_LENGTH];
+	static data_t_num_iter_in  num_iter_in_int[NUM_ITER_IN_LENGTH];
 	data_t_x_out  x_out_int[X_OUT_LENGTH];
 
 	#endif
@@ -54,18 +54,25 @@ void foo	(
 	///////////////////////////////////////
 	//load input vectors from memory (DDR)
 
-	memcpy(x_in,(const data_t_memory*)(memory_inout+byte_x_in_offset/4),X_IN_LENGTH*sizeof(data_t_memory));
+	if(!(byte_x_in_offset & (1<<31)))
+	{
+		memcpy(x_in,(const data_t_memory*)(memory_inout+byte_x_in_offset/4),X_IN_LENGTH*sizeof(data_t_memory));
 
-    //Initialisation: cast to the precision used for the algorithm
-	input_cast_loop_x:for (int i=0; i< X_IN_LENGTH; i++)
-		x_in_int[i]=(data_t_x_in)x_in[i];
+    	//Initialisation: cast to the precision used for the algorithm
+		input_cast_loop_x:for (int i=0; i< X_IN_LENGTH; i++)
+			x_in_int[i]=(data_t_x_in)x_in[i];
 
+	}
+	
 
 	#elif FLOAT_FIX_X_IN == 0
 	///////////////////////////////////////
 	//load input vectors from memory (DDR)
 
-	memcpy(x_in_int,(const data_t_memory*)(memory_inout+byte_x_in_offset/4),X_IN_LENGTH*sizeof(data_t_memory));
+	if(!(byte_x_in_offset & (1<<31)))
+	{
+		memcpy(x_in_int,(const data_t_memory*)(memory_inout+byte_x_in_offset/4),X_IN_LENGTH*sizeof(data_t_memory));
+	}
 
 	#endif
 
@@ -74,18 +81,25 @@ void foo	(
 	///////////////////////////////////////
 	//load input vectors from memory (DDR)
 
-	memcpy(num_iter_in,(const data_t_memory*)(memory_inout+byte_num_iter_in_offset/4),NUM_ITER_IN_LENGTH*sizeof(data_t_memory));
+	if(!(byte_num_iter_in_offset & (1<<31)))
+	{
+		memcpy(num_iter_in,(const data_t_memory*)(memory_inout+byte_num_iter_in_offset/4),NUM_ITER_IN_LENGTH*sizeof(data_t_memory));
 
-    //Initialisation: cast to the precision used for the algorithm
-	input_cast_loop_num_iter:for (int i=0; i< NUM_ITER_IN_LENGTH; i++)
-		num_iter_in_int[i]=(data_t_num_iter_in)num_iter_in[i];
+    	//Initialisation: cast to the precision used for the algorithm
+		input_cast_loop_num_iter:for (int i=0; i< NUM_ITER_IN_LENGTH; i++)
+			num_iter_in_int[i]=(data_t_num_iter_in)num_iter_in[i];
 
+	}
+	
 
 	#elif FLOAT_FIX_NUM_ITER_IN == 0
 	///////////////////////////////////////
 	//load input vectors from memory (DDR)
 
-	memcpy(num_iter_in_int,(const data_t_memory*)(memory_inout+byte_num_iter_in_offset/4),NUM_ITER_IN_LENGTH*sizeof(data_t_memory));
+	if(!(byte_num_iter_in_offset & (1<<31)))
+	{
+		memcpy(num_iter_in_int,(const data_t_memory*)(memory_inout+byte_num_iter_in_offset/4),NUM_ITER_IN_LENGTH*sizeof(data_t_memory));
+	}
 
 	#endif
 
@@ -107,16 +121,22 @@ void foo	(
 	///////////////////////////////////////
 	//store output vectors to memory (DDR)
 
-	output_cast_loop_x: for(int i = 0; i <  X_OUT_LENGTH; i++)
-		x_out[i]=(data_t_interface_x_out)x_out_int[i];
+	if(!(byte_x_out_offset & (1<<31)))
+	{
+		output_cast_loop_x: for(int i = 0; i <  X_OUT_LENGTH; i++)
+			x_out[i]=(data_t_interface_x_out)x_out_int[i];
 
-	//write results vector y_out to DDR
-	memcpy((data_t_memory *)(memory_inout+byte_x_out_offset/4),x_out,X_OUT_LENGTH*sizeof(data_t_memory));
+		//write results vector y_out to DDR
+		memcpy((data_t_memory *)(memory_inout+byte_x_out_offset/4),x_out,X_OUT_LENGTH*sizeof(data_t_memory));
 
+	}
 	#elif FLOAT_FIX_X_OUT == 0
 	///////////////////////////////////////
 	//write results vector y_out to DDR
-	memcpy((data_t_memory *)(memory_inout+byte_x_out_offset/4),x_out_int,X_OUT_LENGTH*sizeof(data_t_memory));
+	if(!(byte_x_out_offset & (1<<31)))
+	{
+		memcpy((data_t_memory *)(memory_inout+byte_x_out_offset/4),x_out_int,X_OUT_LENGTH*sizeof(data_t_memory));
+	}
 
 	#endif
 

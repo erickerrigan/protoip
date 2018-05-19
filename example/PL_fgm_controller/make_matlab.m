@@ -1,13 +1,16 @@
 %% to test the FGM algorithm with the HIL experimental setup, run from Matlab
 
-ip_design_test('project_name','fgm_controller','type_test','c','num_test',1);
-ip_design_test('project_name','fgm_controller','type_test','xsim','num_test',1);
+ip_design_test('project_name','fgm_controller','type_test','c');
+ip_design_test('project_name','fgm_controller','type_test','xsim');
 
 ip_design_build('project_name','fgm_controller');
 
 ip_prototype_build('project_name','fgm_controller','board_name','zedboard');
+
+
+%% Download and run the project on the board
 ip_prototype_load('project_name','fgm_controller','board_name','zedboard','type_eth','udp');
-ip_prototype_test('project_name','fgm_controller','board_name','zedboard','num_test',3000);
+ip_prototype_test('project_name','fgm_controller','board_name','zedboard','num_test',1000);
 
 
 %% plot closed-loop test states

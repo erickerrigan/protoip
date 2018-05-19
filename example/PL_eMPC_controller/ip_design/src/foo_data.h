@@ -14,11 +14,11 @@
 #include <cstdlib>
 #include <cstring>
 #include <stdio.h>
-#include <math.h>
 #include <fstream>
 #include <string>
 #include <sstream>
 #include <vector>
+#include <hls_math.h>
 
 
 // Define FLOAT_FIX_VECTOR_NAME=1 to enable  fixed-point (up to 32 bits word length) arithmetic precision or 

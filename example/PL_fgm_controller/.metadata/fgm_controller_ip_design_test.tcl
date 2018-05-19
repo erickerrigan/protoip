@@ -67,6 +67,24 @@ cd ip_design/test/prj
 open_project -reset $project_name
 set_top foo
 
+
+#added by Bulat
+#Copy project settings files from src if they exist
+if { [file exists ../../src/.cproject] } {
+	file copy -force ../../src/.cproject $project_name
+}
+
+if { [file exists ../../src/.project] } {
+	file copy -force ../../src/.project $project_name
+}
+
+if { [file exists ../../src/vivado_hls.app] } {
+	file copy -force ../../src/vivado_hls.app $project_name
+}
+#end added by Bulat
+
+
+
 # Add here below other files made by the user:
 set filename [format "../../src/foo_data.h"] 
 add_files $filename

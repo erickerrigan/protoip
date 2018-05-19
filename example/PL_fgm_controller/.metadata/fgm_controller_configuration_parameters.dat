@@ -30,10 +30,10 @@ zedboard
 #mem_base_address
 33554432
 #num_test
-3000
+1000
 #type_test
 0
 #type_template
 PL
 #type_design_flow
-matlab
+vivado

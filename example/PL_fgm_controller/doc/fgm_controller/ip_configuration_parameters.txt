@@ -52,7 +52,7 @@ FPGA name
 ---------------------------------------------------------
 xc7z020clg484-1
 
-NOTE: Any Xilinx 7 Series and Zynq®-7000 are supported, but only a some of them are supported if the purpose is to prototype the designed IP.
+NOTE: Any Xilinx 7 Series and ZynqÂ®-7000 are supported, but only a some of them are supported if the purpose is to prototype the designed IP.
 
 
 ---------------------------------------------------------
@@ -82,7 +82,7 @@ DDR3 memory base address
 ---------------------------------------------------------
 Number of test(s)
 ---------------------------------------------------------
-3000
+1000
 
 
 ---------------------------------------------------------
